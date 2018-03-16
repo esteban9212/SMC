@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,12 +12,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class CdioCourseMtx
  * 
- * @property float $ID_COURSE
- * @property float $ID_CDIO_LVL
+ * @property int $ID_COURSE
+ * @property int $ID_CDIO_LVL
  * @property string $VERSION
- * @property float $ID_MTX_COURSE_CDIO_LVL
+ * @property int $ID_MTX_COURSE_CDIO_LVL
  * @property string $ID_PROGRAM
- * @property float $ID_CDIO_SKILL
+ * @property int $ID_CDIO_SKILL
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\CdioLvl $cdio_lvl
  * @property \App\Models\CdioSkill $cdio_skill
@@ -30,14 +32,11 @@ class CdioCourseMtx extends Eloquent
 {
 	protected $table = 'cdio_course_mtx';
 	protected $primaryKey = 'ID_MTX_COURSE_CDIO_LVL';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_COURSE' => 'float',
-		'ID_CDIO_LVL' => 'float',
-		'ID_MTX_COURSE_CDIO_LVL' => 'float',
-		'ID_CDIO_SKILL' => 'float'
+		'ID_COURSE' => 'int',
+		'ID_CDIO_LVL' => 'int',
+		'ID_CDIO_SKILL' => 'int'
 	];
 
 	protected $fillable = [

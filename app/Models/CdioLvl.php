@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,9 +12,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class CdioLvl
  * 
- * @property float $ID_CDIO_LVL
+ * @property int $ID_CDIO_LVL
  * @property string $SYMBOL
  * @property string $DESCRIPTION
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \Illuminate\Database\Eloquent\Collection $cdio_course_mtxes
  *
@@ -24,12 +26,6 @@ class CdioLvl extends Eloquent
 {
 	protected $table = 'cdio_lvl';
 	protected $primaryKey = 'ID_CDIO_LVL';
-	public $incrementing = false;
-	public $timestamps = false;
-
-	protected $casts = [
-		'ID_CDIO_LVL' => 'float'
-	];
 
 	protected $fillable = [
 		'SYMBOL',

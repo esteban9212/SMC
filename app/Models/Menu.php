@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,11 +12,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class Menu
  * 
- * @property float $ID_MENU
+ * @property int $ID_MENU
  * @property string $MENU_NAME
  * @property string $URL
  * @property string $TIPO
- * @property float $ID_MENU_PADRE
+ * @property int $ID_MENU_PADRE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\Menu $menu
  * @property \Illuminate\Database\Eloquent\Collection $menus
@@ -28,12 +30,9 @@ class Menu extends Eloquent
 {
 	protected $table = 'menu';
 	protected $primaryKey = 'ID_MENU';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_MENU' => 'float',
-		'ID_MENU_PADRE' => 'float'
+		'ID_MENU_PADRE' => 'int'
 	];
 
 	protected $fillable = [

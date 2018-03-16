@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,12 +12,16 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class Course
  * 
- * @property float $ID_COURSE
+ * @property int $ID_COURSE
  * @property string $NAME_COURSE
  * @property string $CODE
- * @property float $CREDITS
+ * @property int $CREDITS
  * @property string $PROGRAM_ID_PROGRAM
+ * @property int $BLOCK_COURSE_ID_BLOCK
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
+ * @property \App\Models\BlockCourse $block_course
  * @property \App\Models\ProgramSmc $program_smc
  * @property \Illuminate\Database\Eloquent\Collection $as_srcs
  * @property \Illuminate\Database\Eloquent\Collection $cdio_course_mtxes
@@ -29,20 +33,24 @@ class Course extends Eloquent
 {
 	protected $table = 'course';
 	protected $primaryKey = 'ID_COURSE';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_COURSE' => 'float',
-		'CREDITS' => 'float'
+		'CREDITS' => 'int',
+		'BLOCK_COURSE_ID_BLOCK' => 'int'
 	];
 
 	protected $fillable = [
 		'NAME_COURSE',
 		'CODE',
 		'CREDITS',
-		'PROGRAM_ID_PROGRAM'
+		'PROGRAM_ID_PROGRAM',
+		'BLOCK_COURSE_ID_BLOCK'
 	];
+
+	public function block_course()
+	{
+		return $this->belongsTo(\App\Models\BlockCourse::class, 'BLOCK_COURSE_ID_BLOCK');
+	}
 
 	public function program_smc()
 	{

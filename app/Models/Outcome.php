@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,13 +12,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class Outcome
  * 
- * @property float $ID_ST_OUTCOME
+ * @property int $ID_ST_OUTCOME
  * @property string $CRITERION
  * @property string $DESCRIPTION
  * @property string $PROGRAM_ID_PROGRAM
  * @property string $SHORT_DESCRIPTION
- * @property float $USER_CIP_ID_USER
- * @property float $STATE_ID_STATE
+ * @property int $USER_CIP_ID_USER
+ * @property int $STATE_ID_STATE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\ProgramSmc $program_smc
  * @property \App\Models\StateSmc $state_smc
@@ -33,13 +35,10 @@ class Outcome extends Eloquent
 {
 	protected $table = 'outcome';
 	protected $primaryKey = 'ID_ST_OUTCOME';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_ST_OUTCOME' => 'float',
-		'USER_CIP_ID_USER' => 'float',
-		'STATE_ID_STATE' => 'float'
+		'USER_CIP_ID_USER' => 'int',
+		'STATE_ID_STATE' => 'int'
 	];
 
 	protected $fillable = [
@@ -79,6 +78,7 @@ class Outcome extends Eloquent
 	public function peos()
 	{
 		return $this->belongsToMany(\App\Models\Peo::class, 'outcome_peo_mtx', 'OUTCOME_ID_ST_OUTCOME', 'PEO_ID_PEO')
-					->withPivot('OUTCOME_PEO');
+					->withPivot('OUTCOME_PEO')
+					->withTimestamps();
 	}
 }

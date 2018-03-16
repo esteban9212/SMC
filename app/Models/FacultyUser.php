@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,9 +12,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class FacultyUser
  * 
- * @property float $FACULTY_ID_FACULTY
- * @property float $USER_CIP_ID_USER
- * @property float $ID_FACULTY_USER
+ * @property int $FACULTY_ID_FACULTY
+ * @property int $USER_CIP_ID_USER
+ * @property int $ID_FACULTY_USER
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\Faculty $faculty
  * @property \App\Models\UserCip $user_cip
@@ -25,13 +27,10 @@ class FacultyUser extends Eloquent
 {
 	protected $table = 'faculty_user';
 	protected $primaryKey = 'ID_FACULTY_USER';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'FACULTY_ID_FACULTY' => 'float',
-		'USER_CIP_ID_USER' => 'float',
-		'ID_FACULTY_USER' => 'float'
+		'FACULTY_ID_FACULTY' => 'int',
+		'USER_CIP_ID_USER' => 'int'
 	];
 
 	protected $fillable = [

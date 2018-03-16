@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -13,12 +13,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class MainCycle
  * 
  * @property int $DURATION
- * @property float $ID_CYCLE
+ * @property int $ID_CYCLE
  * @property string $CYCLE_NAME
  * @property string $PROGRAM_ID_PROGRAM
  * @property string $INITIAL_DATE_CYCLE
  * @property string $FINAL_DATE_CYCLE
- * @property float $MAIN_CYCLE_ID_CYCLE
+ * @property int $MAIN_CYCLE_ID_CYCLE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\MainCycle $main_cycle
  * @property \App\Models\ProgramSmc $program_smc
@@ -32,13 +34,10 @@ class MainCycle extends Eloquent
 {
 	protected $table = 'main_cycle';
 	protected $primaryKey = 'ID_CYCLE';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
 		'DURATION' => 'int',
-		'ID_CYCLE' => 'float',
-		'MAIN_CYCLE_ID_CYCLE' => 'float'
+		'MAIN_CYCLE_ID_CYCLE' => 'int'
 	];
 
 	protected $fillable = [

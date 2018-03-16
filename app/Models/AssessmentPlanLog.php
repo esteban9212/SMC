@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,18 +12,20 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class AssessmentPlanLog
  * 
- * @property float $ID_ASSESSMENT_PLAN_LOG
+ * @property int $ID_ASSESSMENT_PLAN_LOG
  * @property \Carbon\Carbon $CREATION_DATE
- * @property float $ID_USER
+ * @property int $ID_USER
  * @property \Carbon\Carbon $EVALUATION_DATE
  * @property string $EVALUATION_FREQUENCY
- * @property float $ID_PERIOD
- * @property float $ID_STATE
- * @property float $ID_CYCLE
- * @property float $ID_STUDENT_OUTCOME
+ * @property int $ID_PERIOD
+ * @property int $ID_STATE
+ * @property int $ID_CYCLE
+ * @property int $ID_STUDENT_OUTCOME
  * @property string $LOG_ACTION
  * @property \Carbon\Carbon $ACTION_DATE
- * @property float $LAST_ID_STATE
+ * @property int $LAST_ID_STATE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  *
  * @package App\Models
  */
@@ -31,17 +33,14 @@ class AssessmentPlanLog extends Eloquent
 {
 	protected $table = 'assessment_plan_log';
 	protected $primaryKey = 'ID_ASSESSMENT_PLAN_LOG';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_ASSESSMENT_PLAN_LOG' => 'float',
-		'ID_USER' => 'float',
-		'ID_PERIOD' => 'float',
-		'ID_STATE' => 'float',
-		'ID_CYCLE' => 'float',
-		'ID_STUDENT_OUTCOME' => 'float',
-		'LAST_ID_STATE' => 'float'
+		'ID_USER' => 'int',
+		'ID_PERIOD' => 'int',
+		'ID_STATE' => 'int',
+		'ID_CYCLE' => 'int',
+		'ID_STUDENT_OUTCOME' => 'int',
+		'LAST_ID_STATE' => 'int'
 	];
 
 	protected $dates = [

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,14 +12,16 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class EvalReport
  * 
- * @property float $ID_EVAL_REPORT
- * @property float $PERIOD_ID_PERIOD
- * @property float $STATE_ID_STATE
- * @property float $USER_CIP_ID_USER
+ * @property int $ID_EVAL_REPORT
+ * @property int $PERIOD_ID_PERIOD
+ * @property int $STATE_ID_STATE
+ * @property int $USER_CIP_ID_USER
  * @property int $ID_EVAL_CYCLE
- * @property float $PERIOD
- * @property float $ASSIGNED_TO
- * @property float $STATISTIC
+ * @property int $PERIOD
+ * @property int $ASSIGNED_TO
+ * @property int $STATISTIC
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\UserCip $user_cip
  * @property \App\Models\EvalCycle $eval_cycle
@@ -32,18 +34,15 @@ class EvalReport extends Eloquent
 {
 	protected $table = 'eval_report';
 	protected $primaryKey = 'ID_EVAL_REPORT';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_EVAL_REPORT' => 'float',
-		'PERIOD_ID_PERIOD' => 'float',
-		'STATE_ID_STATE' => 'float',
-		'USER_CIP_ID_USER' => 'float',
+		'PERIOD_ID_PERIOD' => 'int',
+		'STATE_ID_STATE' => 'int',
+		'USER_CIP_ID_USER' => 'int',
 		'ID_EVAL_CYCLE' => 'int',
-		'PERIOD' => 'float',
-		'ASSIGNED_TO' => 'float',
-		'STATISTIC' => 'float'
+		'PERIOD' => 'int',
+		'ASSIGNED_TO' => 'int',
+		'STATISTIC' => 'int'
 	];
 
 	protected $fillable = [

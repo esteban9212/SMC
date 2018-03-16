@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,16 +12,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class UserCip
  * 
- * @property float $ID_USER
+ * @property int $ID_USER
  * @property string $NAME_USER
  * @property string $LAST_NAME
  * @property string $EMAIL
  * @property string $IDENTIFICATION
  * @property string $LOGIN
  * @property string $PASSWORD_USER
- * @property float $STATE_ID_STATE
+ * @property int $STATE_ID_STATE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\StateSmc $state_smc
+ * @property \Illuminate\Database\Eloquent\Collection $block_courses
  * @property \Illuminate\Database\Eloquent\Collection $course_professors
  * @property \Illuminate\Database\Eloquent\Collection $eval_reports
  * @property \Illuminate\Database\Eloquent\Collection $evide_files
@@ -38,12 +41,9 @@ class UserCip extends Eloquent
 {
 	protected $table = 'user_cip';
 	protected $primaryKey = 'ID_USER';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_USER' => 'float',
-		'STATE_ID_STATE' => 'float'
+		'STATE_ID_STATE' => 'int'
 	];
 
 	protected $fillable = [
@@ -59,6 +59,11 @@ class UserCip extends Eloquent
 	public function state_smc()
 	{
 		return $this->belongsTo(\App\Models\StateSmc::class, 'STATE_ID_STATE');
+	}
+
+	public function block_courses()
+	{
+		return $this->hasMany(\App\Models\BlockCourse::class, 'USER_CIP_ID_USER');
 	}
 
 	public function course_professors()
@@ -104,6 +109,7 @@ class UserCip extends Eloquent
 	public function role_cips()
 	{
 		return $this->belongsToMany(\App\Models\RoleCip::class, 'user_cip_role_cip', 'USER_CIP_ID_USER', 'ROLE_CIP_ID_ROLE')
-					->withPivot('ID_USER_CIP_ROLE');
+					->withPivot('ID_USER_CIP_ROLE')
+					->withTimestamps();
 	}
 }

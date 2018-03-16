@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,16 +12,18 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class OutcomeLog
  * 
- * @property float $ID_OUTCOME_LOG
+ * @property int $ID_OUTCOME_LOG
  * @property string $CRITERION
  * @property string $DESCRIPTION
- * @property float $ID_PROGRAM
+ * @property int $ID_PROGRAM
  * @property string $SHORT_DESCRIPTION
- * @property float $ID_USER
- * @property float $ID_STATE
+ * @property int $ID_USER
+ * @property int $ID_STATE
  * @property string $LOG_ACTION
  * @property \Carbon\Carbon $ACTION_DATE
- * @property float $LAST_ID_USER
+ * @property int $LAST_ID_USER
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  *
  * @package App\Models
  */
@@ -29,15 +31,12 @@ class OutcomeLog extends Eloquent
 {
 	protected $table = 'outcome_log';
 	protected $primaryKey = 'ID_OUTCOME_LOG';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_OUTCOME_LOG' => 'float',
-		'ID_PROGRAM' => 'float',
-		'ID_USER' => 'float',
-		'ID_STATE' => 'float',
-		'LAST_ID_USER' => 'float'
+		'ID_PROGRAM' => 'int',
+		'ID_USER' => 'int',
+		'ID_STATE' => 'int',
+		'LAST_ID_USER' => 'int'
 	];
 
 	protected $dates = [

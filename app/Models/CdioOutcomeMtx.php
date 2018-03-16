@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,12 +12,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class CdioOutcomeMtx
  * 
- * @property float $ID_ST_OUTCOME
- * @property float $ID_CDIO_SKILL
+ * @property int $ID_ST_OUTCOME
+ * @property int $ID_CDIO_SKILL
  * @property string $VERSION
- * @property float $ID_MTX_OUTCOME_CDIO
+ * @property int $ID_MTX_OUTCOME_CDIO
  * @property string $PROGRAM
- * @property float $CORRELATION
+ * @property int $CORRELATION
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\CdioSkill $cdio_skill
  * @property \App\Models\Outcome $outcome
@@ -29,14 +31,11 @@ class CdioOutcomeMtx extends Eloquent
 {
 	protected $table = 'cdio_outcome_mtx';
 	protected $primaryKey = 'ID_MTX_OUTCOME_CDIO';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_ST_OUTCOME' => 'float',
-		'ID_CDIO_SKILL' => 'float',
-		'ID_MTX_OUTCOME_CDIO' => 'float',
-		'CORRELATION' => 'float'
+		'ID_ST_OUTCOME' => 'int',
+		'ID_CDIO_SKILL' => 'int',
+		'CORRELATION' => 'int'
 	];
 
 	protected $fillable = [

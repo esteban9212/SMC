@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,10 +12,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class PiSmc
  * 
- * @property float $ID_PI
+ * @property int $ID_PI
  * @property string $CODE
  * @property string $DESCRIPTION
- * @property float $PLAN_ID_PLAN
+ * @property int $PLAN_ID_PLAN
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\PlanSmc $plan_smc
  * @property \Illuminate\Database\Eloquent\Collection $as_srcs
@@ -27,12 +29,9 @@ class PiSmc extends Eloquent
 {
 	protected $table = 'pi_smc';
 	protected $primaryKey = 'ID_PI';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_PI' => 'float',
-		'PLAN_ID_PLAN' => 'float'
+		'PLAN_ID_PLAN' => 'int'
 	];
 
 	protected $fillable = [

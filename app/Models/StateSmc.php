@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,12 +12,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class StateSmc
  * 
- * @property float $ID_STATE
+ * @property int $ID_STATE
  * @property string $STATE_NAME
- * @property float $STATE_TYPE_ID_STATE_TYPE
+ * @property int $STATE_TYPE_ID_STATE_TYPE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\StateType $state_type
- * @property \Illuminate\Database\Eloquent\Collection $alerts
  * @property \Illuminate\Database\Eloquent\Collection $eval_reports
  * @property \Illuminate\Database\Eloquent\Collection $outcomes
  * @property \Illuminate\Database\Eloquent\Collection $plan_smcs
@@ -30,12 +31,9 @@ class StateSmc extends Eloquent
 {
 	protected $table = 'state_smc';
 	protected $primaryKey = 'ID_STATE';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_STATE' => 'float',
-		'STATE_TYPE_ID_STATE_TYPE' => 'float'
+		'STATE_TYPE_ID_STATE_TYPE' => 'int'
 	];
 
 	protected $fillable = [
@@ -46,11 +44,6 @@ class StateSmc extends Eloquent
 	public function state_type()
 	{
 		return $this->belongsTo(\App\Models\StateType::class, 'STATE_TYPE_ID_STATE_TYPE');
-	}
-
-	public function alerts()
-	{
-		return $this->hasMany(\App\Models\Alert::class, 'STATE_ID_STATE');
 	}
 
 	public function eval_reports()

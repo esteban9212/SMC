@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,18 +12,20 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class AsSrc
  * 
- * @property float $ID_AS_SRC
- * @property float $USER_CIP_ID_USER
- * @property float $COURSE_ID_COURSE
- * @property float $PI_ID_PI
- * @property float $METHOD_ID_AS_METHOD
+ * @property int $ID_AS_SRC
+ * @property int $USER_CIP_ID_USER
+ * @property int $COURSE_ID_COURSE
+ * @property int $PI_ID_PI
+ * @property int $METHOD_ID_AS_METHOD
  * @property \Carbon\Carbon $COLLECTION_DATE
  * @property string $COLLECTION_FREQUENCY
  * @property string $METHODOLOGY
- * @property float $POPULATION
+ * @property int $POPULATION
  * @property string $RESULT
  * @property string $IMPROVEMENT
  * @property string $ASSIGNED
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\Course $course
  * @property \App\Models\Method $method
@@ -37,16 +39,13 @@ class AsSrc extends Eloquent
 {
 	protected $table = 'as_src';
 	protected $primaryKey = 'ID_AS_SRC';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_AS_SRC' => 'float',
-		'USER_CIP_ID_USER' => 'float',
-		'COURSE_ID_COURSE' => 'float',
-		'PI_ID_PI' => 'float',
-		'METHOD_ID_AS_METHOD' => 'float',
-		'POPULATION' => 'float'
+		'USER_CIP_ID_USER' => 'int',
+		'COURSE_ID_COURSE' => 'int',
+		'PI_ID_PI' => 'int',
+		'METHOD_ID_AS_METHOD' => 'int',
+		'POPULATION' => 'int'
 	];
 
 	protected $dates = [

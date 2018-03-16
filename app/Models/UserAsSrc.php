@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -13,8 +13,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class UserAsSrc
  * 
  * @property int $ID_USER_AS_SRC
- * @property float $SRC_USER_ID
- * @property float $AS_SRC_ID
+ * @property int $SRC_USER_ID
+ * @property int $AS_SRC_ID
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\AsSrc $as_src
  * @property \App\Models\UserCip $user_cip
@@ -25,13 +27,10 @@ class UserAsSrc extends Eloquent
 {
 	protected $table = 'user_as_src';
 	protected $primaryKey = 'ID_USER_AS_SRC';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_USER_AS_SRC' => 'int',
-		'SRC_USER_ID' => 'float',
-		'AS_SRC_ID' => 'float'
+		'SRC_USER_ID' => 'int',
+		'AS_SRC_ID' => 'int'
 	];
 
 	protected $fillable = [

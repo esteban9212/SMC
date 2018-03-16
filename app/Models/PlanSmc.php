@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,15 +12,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class PlanSmc
  * 
- * @property float $ID_PLAN
+ * @property int $ID_PLAN
  * @property \Carbon\Carbon $CREATION_DATE
- * @property float $USER_CIP_ID_USER
+ * @property int $USER_CIP_ID_USER
  * @property \Carbon\Carbon $EVALUATION_DATE
  * @property string $EVALUATION_FREQUENCY
- * @property float $PERIOD_ID_PERIOD
- * @property float $STATE_ID_STATE
- * @property float $ID_OUTCOME_CYCLE_AS
- * @property float $ID_RUBRIC_FILE
+ * @property int $PERIOD_ID_PERIOD
+ * @property int $STATE_ID_STATE
+ * @property int $ID_OUTCOME_CYCLE_AS
+ * @property int $ID_RUBRIC_FILE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\OutcomeCycleA $outcome_cycle_a
  * @property \App\Models\RubricFile $rubric_file
@@ -37,16 +39,13 @@ class PlanSmc extends Eloquent
 {
 	protected $table = 'plan_smc';
 	protected $primaryKey = 'ID_PLAN';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_PLAN' => 'float',
-		'USER_CIP_ID_USER' => 'float',
-		'PERIOD_ID_PERIOD' => 'float',
-		'STATE_ID_STATE' => 'float',
-		'ID_OUTCOME_CYCLE_AS' => 'float',
-		'ID_RUBRIC_FILE' => 'float'
+		'USER_CIP_ID_USER' => 'int',
+		'PERIOD_ID_PERIOD' => 'int',
+		'STATE_ID_STATE' => 'int',
+		'ID_OUTCOME_CYCLE_AS' => 'int',
+		'ID_RUBRIC_FILE' => 'int'
 	];
 
 	protected $dates = [

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,9 +12,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class UserCipRoleCip
  * 
- * @property float $ROLE_CIP_ID_ROLE
- * @property float $USER_CIP_ID_USER
- * @property float $ID_USER_CIP_ROLE
+ * @property int $ROLE_CIP_ID_ROLE
+ * @property int $USER_CIP_ID_USER
+ * @property int $ID_USER_CIP_ROLE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\RoleCip $role_cip
  * @property \App\Models\UserCip $user_cip
@@ -25,13 +27,10 @@ class UserCipRoleCip extends Eloquent
 {
 	protected $table = 'user_cip_role_cip';
 	protected $primaryKey = 'ID_USER_CIP_ROLE';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ROLE_CIP_ID_ROLE' => 'float',
-		'USER_CIP_ID_USER' => 'float',
-		'ID_USER_CIP_ROLE' => 'float'
+		'ROLE_CIP_ID_ROLE' => 'int',
+		'USER_CIP_ID_USER' => 'int'
 	];
 
 	protected $fillable = [

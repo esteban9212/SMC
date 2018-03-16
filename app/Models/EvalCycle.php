@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,9 +12,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class EvalCycle
  * 
- * @property float $MAIN_CYCLE_ID_CYCLE
- * @property float $PLAN_ID_PLAN
+ * @property int $MAIN_CYCLE_ID_CYCLE
+ * @property int $PLAN_ID_PLAN
  * @property int $ID_EVAL_CYCLE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\MainCycle $main_cycle
  * @property \App\Models\PlanSmc $plan_smc
@@ -26,13 +28,10 @@ class EvalCycle extends Eloquent
 {
 	protected $table = 'eval_cycle';
 	protected $primaryKey = 'ID_EVAL_CYCLE';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'MAIN_CYCLE_ID_CYCLE' => 'float',
-		'PLAN_ID_PLAN' => 'float',
-		'ID_EVAL_CYCLE' => 'int'
+		'MAIN_CYCLE_ID_CYCLE' => 'int',
+		'PLAN_ID_PLAN' => 'int'
 	];
 
 	protected $fillable = [

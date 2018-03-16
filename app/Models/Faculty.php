@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -13,8 +13,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class Faculty
  * 
  * @property string $CODE
- * @property float $ID_FACULTY
+ * @property int $ID_FACULTY
  * @property string $NAME
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \Illuminate\Database\Eloquent\Collection $faculty_users
  * @property \Illuminate\Database\Eloquent\Collection $program_smcs
@@ -25,12 +27,6 @@ class Faculty extends Eloquent
 {
 	protected $table = 'faculty';
 	protected $primaryKey = 'ID_FACULTY';
-	public $incrementing = false;
-	public $timestamps = false;
-
-	protected $casts = [
-		'ID_FACULTY' => 'float'
-	];
 
 	protected $fillable = [
 		'CODE',

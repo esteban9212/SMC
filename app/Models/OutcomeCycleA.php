@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,9 +12,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class OutcomeCycleA
  * 
- * @property float $MAIN_CYCLE_ID_CYCLE
- * @property float $OUTCOME_ID_ST_OUTCOME
- * @property float $ID_OUTCO_CYCLE
+ * @property int $MAIN_CYCLE_ID_CYCLE
+ * @property int $OUTCOME_ID_ST_OUTCOME
+ * @property int $ID_OUTCO_CYCLE
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\MainCycle $main_cycle
  * @property \App\Models\Outcome $outcome
@@ -25,13 +27,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class OutcomeCycleA extends Eloquent
 {
 	protected $primaryKey = 'ID_OUTCO_CYCLE';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'MAIN_CYCLE_ID_CYCLE' => 'float',
-		'OUTCOME_ID_ST_OUTCOME' => 'float',
-		'ID_OUTCO_CYCLE' => 'float'
+		'MAIN_CYCLE_ID_CYCLE' => 'int',
+		'OUTCOME_ID_ST_OUTCOME' => 'int'
 	];
 
 	protected $fillable = [

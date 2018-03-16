@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,7 +12,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class StateType
  * 
- * @property float $ID_STATE_TYPE
+ * @property int $ID_STATE_TYPE
  * @property string $STATE_TYPE_NAME
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -25,13 +25,10 @@ class StateType extends Eloquent
 {
 	protected $table = 'state_type';
 	protected $primaryKey = 'ID_STATE_TYPE';
-	public $incrementing = false;
 
-	protected $casts = [
-		'ID_STATE_TYPE' => 'float'
+	protected $fillable = [
+		'STATE_TYPE_NAME'
 	];
-
-	protected $fillable = ['ID_STATE_TYPE','STATE_TYPE_NAME'];
 
 	public function state_smcs()
 	{

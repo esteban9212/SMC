@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -12,10 +12,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class CdioSkill
  * 
- * @property float $ID_CDIO_SKILL
+ * @property int $ID_CDIO_SKILL
  * @property string $DESCRIPTION
- * @property float $CDIO_ID_CDIO
- * @property float $CDIO_SKILL_ID_CDIO_SKILL
+ * @property int $CDIO_ID_CDIO
+ * @property int $CDIO_SKILL_ID_CDIO_SKILL
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\Cdio $cdio
  * @property \App\Models\CdioSkill $cdio_skill
@@ -30,13 +32,10 @@ class CdioSkill extends Eloquent
 {
 	protected $table = 'cdio_skill';
 	protected $primaryKey = 'ID_CDIO_SKILL';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'ID_CDIO_SKILL' => 'float',
-		'CDIO_ID_CDIO' => 'float',
-		'CDIO_SKILL_ID_CDIO_SKILL' => 'float'
+		'CDIO_ID_CDIO' => 'int',
+		'CDIO_SKILL_ID_CDIO_SKILL' => 'int'
 	];
 
 	protected $fillable = [

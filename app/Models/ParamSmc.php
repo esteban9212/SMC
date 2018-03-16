@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 14 Mar 2018 15:08:19 +0000.
+ * Date: Fri, 16 Mar 2018 02:33:02 +0000.
  */
 
 namespace App\Models;
@@ -15,14 +15,16 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $PARAMETER_NAME
  * @property string $PARAMETER_DESCRIPTION
  * @property string $TEXT_VALUE
- * @property float $INITIAL_NUMERIC_VALUE
- * @property float $FINAL_NUMERIC_VALUE
+ * @property int $INITIAL_NUMERIC_VALUE
+ * @property int $FINAL_NUMERIC_VALUE
  * @property \Carbon\Carbon $INITIAL_DATE_VALUE
  * @property \Carbon\Carbon $FINAL_DATE_VALUE
  * @property boolean $BLOB_VALUE
  * @property string $CLOB_VALUE
  * @property string $DATA_TYPE
- * @property float $ID_PARAMETER
+ * @property int $ID_PARAMETER
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  *
  * @package App\Models
  */
@@ -30,14 +32,11 @@ class ParamSmc extends Eloquent
 {
 	protected $table = 'param_smc';
 	protected $primaryKey = 'ID_PARAMETER';
-	public $incrementing = false;
-	public $timestamps = false;
 
 	protected $casts = [
-		'INITIAL_NUMERIC_VALUE' => 'float',
-		'FINAL_NUMERIC_VALUE' => 'float',
-		'BLOB_VALUE' => 'boolean',
-		'ID_PARAMETER' => 'float'
+		'INITIAL_NUMERIC_VALUE' => 'int',
+		'FINAL_NUMERIC_VALUE' => 'int',
+		'BLOB_VALUE' => 'boolean'
 	];
 
 	protected $dates = [
