@@ -154,9 +154,9 @@ class Addtimestamp extends Migration
         $table->timestamps(); 
         });
 
-     //   Schema::table('state_type', function (Blueprint $table) {
-     //   $table->timestamps(); 
-     //   });
+        Schema::table('state_type', function (Blueprint $table) {
+        $table->timestamps(); 
+        });
 
         Schema::table('user_as_src', function (Blueprint $table) {
         $table->timestamps(); 
