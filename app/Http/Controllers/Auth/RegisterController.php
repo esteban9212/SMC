@@ -49,7 +49,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'last-name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:user_cip',
+            'identification' => 'required|string|max:255|unique:user_cip',
+            'user-name' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -64,10 +67,10 @@ class RegisterController extends Controller
     {
         return UserCip::create([
             'NAME_USER' => $data['name'],
-            'LAST_NAME' => 'apellido',
+            'LAST_NAME' => $data['last-name'],
             'EMAIL' => $data['email'],
-            'IDENTIFICATION' => '114164635',
-            'LOGIN' => 'bandido',
+            'IDENTIFICATION' => $data['identification'],
+            'LOGIN' => $data['user-name'],
             'PASSWORD_USER' => bcrypt($data['password']),
             'STATE_ID_STATE' => '3'
         ]);
