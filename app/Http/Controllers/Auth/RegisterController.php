@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\UserCip;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -49,7 +49,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:user_cip',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -62,10 +62,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        return UserCip::create([
+            'NAME_USER' => $data['name'],
+            'LAST_NAME' => 'apellido',
+            'EMAIL' => $data['email'],
+            'IDENTIFICATION' => '114164635',
+            'LOGIN' => 'bandido',
+            'PASSWORD_USER' => bcrypt($data['password']),
+            'STATE_ID_STATE' => '3'
         ]);
+
+
     }
 }

@@ -8,6 +8,7 @@
 namespace App\Models;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class UserCip
@@ -37,7 +38,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class UserCip extends Eloquent
+class UserCip extends Authenticatable
 {
 	protected $table = 'user_cip';
 	protected $primaryKey = 'ID_USER';
@@ -112,4 +113,14 @@ class UserCip extends Eloquent
 					->withPivot('ID_USER_CIP_ROLE')
 					->withTimestamps();
 	}
+
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->PASSWORD_USER;
+    }
 }
