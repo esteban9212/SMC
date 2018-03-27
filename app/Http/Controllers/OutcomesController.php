@@ -27,7 +27,7 @@ class OutcomesController extends Controller
 
     /**
      * Display a listing of outcomes by program.
-     * @param  string $id , id del programa: sis,tel,ind
+     * @param  string $id , id del program: sis,tel,ind
      * @return \Illuminate\Http\Response
      */
     public function outcomesByProgram($id)
