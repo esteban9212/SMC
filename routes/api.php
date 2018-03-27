@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
+    Route::resource('programs', 'ProgramController');
+    Route::resource('outcomes', 'OutcomesController');
+
+});
+Route::get('outcomes/{id}', 'OutcomesController@outcomesByProgram')->middleware('cors');
+Route::resource('planesAssessment', 'PlanAssessmentController');

@@ -169,6 +169,11 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
 
+
+        /*
+         * correccion erro cors
+         */
+        Barryvdh\Cors\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
