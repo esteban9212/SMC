@@ -27,6 +27,76 @@ class OutcomesController extends Controller
 
     /**
      * Display a listing of outcomes by program.
+     * @param  string $id , id del director de programa
+     * @return \Illuminate\Http\Response
+     */
+    public function outcomesByDirector($id)
+    {
+
+        $program = DB::table('program_smc')->where([
+            ['USER_CIP_ID_USER', '=', $id]
+        ])->first()->get();
+
+        return outcomesByProgram($program->ID_PROGRAM);
+    }
+
+    /**
+     * Display a listing all outcomes .
+     * @return \Illuminate\Http\Response
+     */
+    public function allOutcomes()
+    {
+
+        $outcomes = DB::table('outcome')->where([
+            //STATE_ID_STATE = '5' outcome  de estado activo
+            ['STATE_ID_STATE', '=', '5'],
+        ])->get();
+
+        $response = Response::json($outcomes, 200);
+        return $response;
+    }
+
+    /**
+     * Display a listing all outcomes .
+     * @param  string $id , id del usuario encargado de un outcome
+     * @return \Illuminate\Http\Response
+     */
+    public function outcomesByUser($id)
+    {
+
+        $outcomes = DB::table('outcome')->where([
+            ['USER_CIP_ID_USER', '=', $id],
+            //STATE_ID_STATE = '5' outcome  de estado activo
+            ['STATE_ID_STATE', '=', '5'],
+        ])->get();
+
+        $response = Response::json($outcomes, 200);
+        return $response;
+    }
+
+
+    /**
+     * Display a listing all outcomes de un usuario en un programa .
+     * @param  string $idUser , id del usuario encargado de un outcome,$idProgram id del programa
+     * @return \Illuminate\Http\Response
+     */
+    public function outcomesByUserAndProgram($idUser, $idProgram)
+    {
+
+        $outcomes = DB::table('outcome')->where([
+            ['USER_CIP_ID_USER', '=', $idUser],
+            ['PROGRAM_ID_PROGRAM', '=', $idProgram],
+            //STATE_ID_STATE = '5' outcome  de estado activo
+            ['STATE_ID_STATE', '=', '5'],
+        ])->get();
+
+        $response = Response::json($outcomes, 200);
+        return $response;
+    }
+
+
+    /**
+     * Display a listing of outcomes by program.
      * @param  string $id , id del program: sis,tel,ind
      * @return \Illuminate\Http\Response
      */
@@ -35,8 +105,14 @@ class OutcomesController extends Controller
 
         $outcomes = DB::table('outcome')->where([
             ['PROGRAM_ID_PROGRAM', '=', $id],
+            //STATE_ID_STATE = '5' outcome  de estado activo
             ['STATE_ID_STATE', '=', '5'],
         ])->get();
+
+        //    foreach ($outcomes as $outc){
+        //      echo $outc->CRITERION;
+        //}
+        //console.log($outcomes);
         $response = Response::json($outcomes, 200);
         //      header("Access-Control-Allow-Origin: *");
         return $response;

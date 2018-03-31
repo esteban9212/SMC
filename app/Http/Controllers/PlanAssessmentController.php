@@ -44,6 +44,26 @@ class PlanAssessmentController extends Controller
     }
 
     /**
+     * Store a plan in database.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function savePlan($idUser, $idOutcomeCycleAs)
+    {
+        $plan = ['USER_CIP_ID_USER' => $idUser, 'CREATION_DATE' => '2018-03-29 07:12:10', 'PERIOD_ID_PERIOD' => '201810', 'STATE_ID_STATE' => '9', 'ID_OUTCOME_CYCLE_AS' => $idOutcomeCycleAs];
+
+        PlanSmc::create($plan);
+        //  console.log("algo");
+
+        $plans = PlanSmc::all();
+        $response = Response::json($plans, 200);
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+        //
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int $id

@@ -41,11 +41,7 @@ class PlanSmc extends Eloquent
 	protected $primaryKey = 'ID_PLAN';
 
 	protected $casts = [
-		'USER_CIP_ID_USER' => 'int',
-		'PERIOD_ID_PERIOD' => 'int',
-		'STATE_ID_STATE' => 'int',
-		'ID_OUTCOME_CYCLE_AS' => 'int',
-		'ID_RUBRIC_FILE' => 'int'
+        'USER_CIP_ID_USER' => 'int', 'PERIOD_ID_PERIOD' => 'int', 'STATE_ID_STATE' => 'int', 'ID_OUTCOME_CYCLE_AS' => 'int', 'ID_RUBRIC_FILE' => 'int'
 	];
 
 	protected $dates = [
