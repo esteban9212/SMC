@@ -22,7 +22,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::resource('outcomes', 'OutcomesController');
     Route::resource('parameters', 'ParameterController');
     Route::resource('planesAssessment', 'PlanAssessmentController');
-    Route::resource('outcomeCycleAs', 'OutcomeCycleAs');
+    Route::resource('outcomeCycleAs', 'OutcomeCycleAsController');
 });
 
 
@@ -38,3 +38,18 @@ Route::get('outcomeCycleAsByOutcomeCycle/{idOutcome}/{idCycle}', 'OutcomeCycleAs
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
 
 Route::get('savePlan/{idUser}/{idOutcomeCycleAs}', 'PlanAssessmentController@savePlan')->middleware('cors');
+
+
+Route::group([
+    'prefix' => 'api/v1',
+    'namespace' => 'Api'
+], function () {
+    Route::post('/auth/register', [
+        'as' => 'auth.register',
+        'uses' => 'AuthController@register'
+  ]);
+  Route::post('/auth/login', [
+      'as' => 'auth.login',
+      'uses' => 'AuthController@login'
+  ]);
+});
