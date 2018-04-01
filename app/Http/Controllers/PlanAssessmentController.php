@@ -57,7 +57,7 @@ class PlanAssessmentController extends Controller
         //  console.log("algo");
 
         $plans = PlanSmc::all();
-        $response = Response::json($plans, 200);
+        $response = Response::json(['message' => 'todo bien']);
         //      header("Access-Control-Allow-Origin: *");
         return $response;
         //

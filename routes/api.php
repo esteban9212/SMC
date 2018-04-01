@@ -33,7 +33,7 @@ Route::get('outcomesByUserAndProgram/{idUser}/{idProgram}', 'OutcomesController@
 Route::get('outcomes/{id}', 'OutcomesController@outcomesByProgram')->middleware('cors');
 
 
-Route::get('outcomeCycleAsByOutcomeCycle/{idOutcome}/{idCycle}', 'OutcomeCycleAs@outcomeCycleAsByOutcomeCycle')->middleware('cors');
+Route::get('outcomeCycleAsByOutcomeCycle/{idOutcome}/{idCycle}', 'OutcomeCycleAsController@outcomeCycleAsByOutcomeCycle')->middleware('cors');
 
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
 
