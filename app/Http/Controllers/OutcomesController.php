@@ -61,6 +61,23 @@ class OutcomesController extends Controller
      * @param  string $id , id del usuario encargado de un outcome
      * @return \Illuminate\Http\Response
      */
+    public function changeStateOutcomeToCreated($id)
+    {
+
+        $outcome = Outcome::where('ID_ST_OUTCOME', '=', $id)->first();
+
+        //  $outcome->STATE_ID_STATE='15';
+        // $outcome->save();
+
+        $response = Response::json($outcome, 200);
+        return $response;
+    }
+
+    /**
+     * Display a listing all outcomes .
+     * @param  string $id , id del usuario encargado de un outcome
+     * @return \Illuminate\Http\Response
+     */
     public function outcomesByUser($id)
     {
 

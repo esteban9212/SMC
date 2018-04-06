@@ -25,19 +25,19 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::resource('outcomeCycleAs', 'OutcomeCycleAsController');
 });
 
-
+Route::get('savePlan/{idUser}/{idOutcomeCycleAs}', 'PlanAssessmentController@savePlan')->middleware('cors');
+Route::get('getPlansList', 'PlanAssessmentController@getPlansList')->middleware('cors');
+Route::get('allOutcomes', 'OutcomesController@allOutcomes')->middleware('cors');
 Route::get('outcomesByDirector/{id}', 'OutcomesController@outcomesByDirector')->middleware('cors');
 Route::get('allOutcomes', 'OutcomesController@allOutcomes')->middleware('cors');
 Route::get('outcomesByUser/{id}', 'OutcomesController@outcomesByUser')->middleware('cors');
 Route::get('outcomesByUserAndProgram/{idUser}/{idProgram}', 'OutcomesController@outcomesByUserAndProgram')->middleware('cors');
 Route::get('outcomes/{id}', 'OutcomesController@outcomesByProgram')->middleware('cors');
-
-
 Route::get('outcomeCycleAsByOutcomeCycle/{idOutcome}/{idCycle}', 'OutcomeCycleAsController@outcomeCycleAsByOutcomeCycle')->middleware('cors');
+Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOutcomeToCreated')->middleware('cors');
+
 
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
-
-Route::get('savePlan/{idUser}/{idOutcomeCycleAs}', 'PlanAssessmentController@savePlan')->middleware('cors');
 
 
 Route::group([
