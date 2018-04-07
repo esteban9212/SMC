@@ -89,20 +89,20 @@ class PlanAssessmentController extends Controller
             $outcome = Outcome::where('ID_ST_OUTCOME', '=', $outcomeid)->first();
 
 
-            $nombre = 'Plan Assessment Outcome ' . $outcome->CRITERION;
+            $Name = 'Plan Assessment ' . $outcome->CRITERION;
             $liderid = $outcome->USER_CIP_ID_USER;
-            $lider = UserCip::where('ID_USER', '=', $liderid)->first();
+            $Leader = UserCip::where('ID_USER', '=', $liderid)->first();
             $programaid = $outcome->PROGRAM_ID_PROGRAM;
-            $programa = ProgramSmc::where('ID_PROGRAM', '=', $programaid)->first();
+            $Program = ProgramSmc::where('ID_PROGRAM', '=', $programaid)->first();
 
             $estadoId = $outcome->STATE_ID_STATE;
-            $estado = StateSmc::where('ID_STATE', '=', $estadoId)->first();
-            $fechaCreacion = $outcome->created_at;
+            $State = StateSmc::where('ID_STATE', '=', $estadoId)->first();
+            $DateCreation = $outcome->created_at;
             $autorid = $plans[$i]->USER_CIP_ID_USER;
-            $autor = UserCip::where('ID_USER', '=', $autorid)->first();
+            $Author = UserCip::where('ID_USER', '=', $autorid)->first();
 
-
-            $plans2[$i] = new PlanAssessmentBasic($nombre, $lider->NAME_USER . " " . $lider->LAST_NAME, $programa->NAME_PROGRAM, $estado->STATE_NAME, $fechaCreacion, $autor->NAME_USER . " " . $autor->LAST_NAME);
+            $Idplan = $i + 1;
+            $plans2[$i] = new PlanAssessmentBasic($Idplan, $Name, $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation, $Author->NAME_USER . " " . $Author->LAST_NAME);
 
         }
 
