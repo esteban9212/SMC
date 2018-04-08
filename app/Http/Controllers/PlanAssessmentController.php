@@ -10,6 +10,7 @@ use App\Models\PlanSmc;
 use App\Models\PlanAssessmentBasic;
 use App\Models\UserCip;
 use App\Models\ProgramSmc;
+use App\Models\MainCycle;
 
 use Illuminate\support\Facades\Response;
 use function Sodium\add;
@@ -84,6 +85,12 @@ class PlanAssessmentController extends Controller
 
             $outcoCycleid = $plans[$i]->ID_OUTCOME_CYCLE_AS;
             $outcomeCycleAs = OutcomeCycleA::where('ID_OUTCO_CYCLE', '=', $outcoCycleid)->first();
+            $cicloPlanid = $outcomeCycleAs->MAIN_CYCLE_ID_CYCLE;
+            $ciclo = MainCycle::where('ID_CYCLE', '=', $cicloPlanid)->first();
+            $mainCicloid = $ciclo->MAIN_CYCLE_ID_CYCLE;
+            $mainCiclo = MainCycle::where('ID_CYCLE', '=', $mainCicloid)->first();
+
+
             $outcomeid = $outcomeCycleAs->OUTCOME_ID_ST_OUTCOME;
 
             $outcome = Outcome::where('ID_ST_OUTCOME', '=', $outcomeid)->first();
@@ -102,7 +109,7 @@ class PlanAssessmentController extends Controller
             $Author = UserCip::where('ID_USER', '=', $autorid)->first();
 
             $Idplan = $i + 1;
-            $plans2[$i] = new PlanAssessmentBasic($Idplan, $Name, $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation, $Author->NAME_USER . " " . $Author->LAST_NAME);
+            $plans2[$i] = new PlanAssessmentBasic($Idplan, $Name, $mainCiclo->CYCLE_NAME, $ciclo->CYCLE_NAME, $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation, $Author->NAME_USER . " " . $Author->LAST_NAME);
 
         }
 

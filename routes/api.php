@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\UserCip;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,14 @@ Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOu
 
 
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
+Route::get('userById/{id}', function ($id) {
+    $user = UserCip::where('ID_USER', '=', $id)->first();
 
+    $response = Response::json($user, 200);
+
+    //      header("Access-Control-Allow-Origin: *");
+    return $response;
+})->middleware('cors');
 
 Route::group([
     'prefix' => 'api/v1',
