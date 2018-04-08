@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 use App\Models\UserCip;
+use App\User;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
@@ -9,15 +10,24 @@ use JWTAuthException;
 class AuthController extends Controller
 {
     private $user;
+    private $userC;
     private $jwtauth;
-    public function __construct(UserCip $user, JWTAuth $jwtauth)
+    public function __construct(UserCip $userC, User $user, JWTAuth $jwtauth)
     {
         $this->user = $user;
+        $this->userC = $userC;
         $this->jwtauth = $jwtauth;
     }
     public function register(RegisterRequest $request)
     {
         $newUser = $this->user->create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+            'identification' => $request->get('identification'),
+        ]);
+
+        $newUserC = $this->userC->create([
             'NAME_USER' => $request->get('NAME_USER'),
             'LAST_NAME' => $request->get('LAST_NAME'),
             'EMAIL' => $request->get('EMAIL'),
@@ -37,7 +47,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         // get user credentials: login, password
-        $credentials = $request->only('LOGIN', 'PASSWORD_USER');
+        $credentials = $request->only('email', 'password');
         $token = null;
         try {
             $token = $this->jwtauth->attempt($credentials);
