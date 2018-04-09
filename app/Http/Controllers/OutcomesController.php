@@ -32,13 +32,41 @@ class OutcomesController extends Controller
      */
     public function outcomesByDirector($id)
     {
-
         $program = DB::table('program_smc')->where([
             ['USER_CIP_ID_USER', '=', $id]
-        ])->first()->get();
+        ])->first();
 
-        return outcomesByProgram($program->ID_PROGRAM);
+
+        $outcomes = DB::table('outcome')->where([
+            ['PROGRAM_ID_PROGRAM', '=', $program->ID_PROGRAM],
+            //STATE_ID_STATE = '5' outcome  de estado activo
+            ['STATE_ID_STATE', '=', '5'],
+        ])->get();
+
+        $response = Response::json($outcomes, 200);
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
     }
+
+    /**
+     * Display a listing of outcomes by program.
+     * @param  string $id , id del program: sis,tel,ind
+     * @return \Illuminate\Http\Response
+     */
+    public function outcomesByProgram($id)
+    {
+
+        $outcomes = DB::table('outcome')->where([
+            ['PROGRAM_ID_PROGRAM', '=', $id],
+            //STATE_ID_STATE = '5' outcome  de estado activo
+            ['STATE_ID_STATE', '=', '5'],
+        ])->get();
+
+        $response = Response::json($outcomes, 200);
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+    }
+
 
     /**
      * Display a listing all outcomes .
@@ -112,28 +140,6 @@ class OutcomesController extends Controller
     }
 
 
-    /**
-     * Display a listing of outcomes by program.
-     * @param  string $id , id del program: sis,tel,ind
-     * @return \Illuminate\Http\Response
-     */
-    public function outcomesByProgram($id)
-    {
-
-        $outcomes = DB::table('outcome')->where([
-            ['PROGRAM_ID_PROGRAM', '=', $id],
-            //STATE_ID_STATE = '5' outcome  de estado activo
-            ['STATE_ID_STATE', '=', '5'],
-        ])->get();
-
-        //    foreach ($outcomes as $outc){
-        //      echo $outc->CRITERION;
-        //}
-        //console.log($outcomes);
-        $response = Response::json($outcomes, 200);
-        //      header("Access-Control-Allow-Origin: *");
-        return $response;
-    }
 
     /**
      * Show the form for creating a new resource.
