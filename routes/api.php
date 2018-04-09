@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\UserCip;
+use App\Models\UserCipRoleCip;
+use App\Models\RoleCip;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +60,27 @@ Route::group([
     Route::post('/auth/register', [
         'as' => 'auth.register',
         'uses' => 'AuthController@register'
-  ]);
-  Route::post('/auth/login', [
-      'as' => 'auth.login',
-      'uses' => 'AuthController@login'
-  ]);
+    ]);
+    Route::post('/auth/login', [
+        'as' => 'auth.login',
+        'uses' => 'AuthController@login'
+    ]);
 });
+
+Route::get('rolsByUserId/{id}', function ($id) {
+    $rols = UserCipRoleCip::where('USER_CIP_ID_USER', '=', $id)->get();
+
+    $response = Response::json($rols, 200);
+
+    //      header("Access-Control-Allow-Origin: *");
+    return $response;
+})->middleware('cors');
+
+Route::get('getRol/{id}', function ($id) {
+    $rol = RoleCip::where('ID_ROLE', '=', $id)->first();
+
+    $response = Response::json($rol, 200);
+
+    //      header("Access-Control-Allow-Origin: *");
+    return $response;
+})->middleware('cors');
