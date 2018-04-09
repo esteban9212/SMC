@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Models\UserCip;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +46,9 @@ Route::get('userById/{id}', function ($id) {
     //      header("Access-Control-Allow-Origin: *");
     return $response;
 })->middleware('cors');
+
+Route::post('/auth/login', 'AuthController@login')->middleware('cors');
+
 
 Route::group([
     'prefix' => 'api/v1',

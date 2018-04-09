@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 use App\Models\UserCip;
 use App\User;
 use App\Http\Requests\RegisterRequest;
