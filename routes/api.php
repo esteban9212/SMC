@@ -39,6 +39,8 @@ Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOu
 
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
 
+Route::post('/auth/login', 'AuthController@login')->middleware('cors');
+
 
 Route::group([
     'prefix' => 'api/v1',
