@@ -21,10 +21,12 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $newUser = $this->user->create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
-            'identification' => $request->get('identification'),
+            'name' => $request->get('NAME_USER'),
+            'last_name' => $request->get('LAST_NAME'),
+            'username' => $request->get('LOGIN'),
+            'email' => $request->get('EMAIL'),
+            'password' => bcrypt($request->get('PASSWORD_USER')),
+            'identification' => $request->get('IDENTIFICATION'),
         ]);
 
         $newUserC = $this->userC->create([
@@ -47,7 +49,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         // get user credentials: login, password
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
         $token = null;
         try {
             $token = $this->jwtauth->attempt($credentials);
