@@ -35,7 +35,7 @@ Route::get('outcomesByDirector/{id}', 'OutcomesController@outcomesByDirector')->
 Route::get('allOutcomes', 'OutcomesController@allOutcomes')->middleware('cors');
 Route::get('outcomesByUser/{id}', 'OutcomesController@outcomesByUser')->middleware('cors');
 Route::get('outcomesByUserAndProgram/{idUser}/{idProgram}', 'OutcomesController@outcomesByUserAndProgram')->middleware('cors');
-Route::get('outcomes/{id}', 'OutcomesController@outcomesByProgram')->middleware('cors');
+Route::get('outcomesByProgram/{id}', 'OutcomesController@outcomesByProgram')->middleware('cors');
 Route::get('outcomeCycleAsByOutcomeCycle/{idOutcome}/{idCycle}', 'OutcomeCycleAsController@outcomeCycleAsByOutcomeCycle')->middleware('cors');
 Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOutcomeToCreated')->middleware('cors');
 
@@ -51,6 +51,9 @@ Route::get('userById/{id}', function ($id) {
 })->middleware('cors');
 
 Route::post('/auth/login', 'AuthController@login')->middleware('cors');
+Route::post('logout', 'AuthController@logout')->middleware('cors');
+Route::post('refresh', 'AuthController@refresh')->middleware('cors');
+Route::post('me', 'AuthController@me')->middleware('cors');
 
 
 Route::group([
