@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::resource('parameters', 'ParameterController');
     Route::resource('planesAssessment', 'PlanAssessmentController');
     Route::resource('outcomeCycleAs', 'OutcomeCycleAsController');
+    Route::resource('pis', 'PiController');
 });
 
 Route::get('savePlan/{idUser}/{idOutcomeCycleAs}', 'PlanAssessmentController@savePlan')->middleware('cors');
@@ -38,7 +39,9 @@ Route::get('outcomesByUserAndProgram/{idUser}/{idProgram}', 'OutcomesController@
 Route::get('outcomesByProgram/{id}', 'OutcomesController@outcomesByProgram')->middleware('cors');
 Route::get('outcomeCycleAsByOutcomeCycle/{idOutcome}/{idCycle}', 'OutcomeCycleAsController@outcomeCycleAsByOutcomeCycle')->middleware('cors');
 Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOutcomeToCreated')->middleware('cors');
-
+Route::get('getPisByPlanId/{id}', 'PiController@getPisByPlanId')->middleware('cors');
+Route::get('getCdioByPiId/{id}', 'CdioPiController@getCdioByPiId')->middleware('cors');
+Route::get('getCurricularMappinCDIOOutcome/{idpi}', 'CdioPiController@getCurricularMappinCDIOOutcome')->middleware('cors');
 
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
 Route::get('userById/{id}', function ($id) {
