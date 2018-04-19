@@ -43,6 +43,8 @@ Route::get('getPisByPlanId/{id}', 'PiController@getPisByPlanId')->middleware('co
 Route::get('getCdioByPiId/{id}', 'CdioPiController@getCdioByPiId')->middleware('cors');
 Route::get('getCurricularMappinCDIOOutcome/{idpi}', 'CdioPiController@getCurricularMappinCDIOOutcome')->middleware('cors');
 
+Route::get('assessmentSourceByPi/{idPi}', 'AssessmentSourceController@assessmentSourceByPi')->middleware('cors');
+
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
 Route::get('userById/{id}', function ($id) {
     $user = UserCip::where('ID_USER', '=', $id)->first();
