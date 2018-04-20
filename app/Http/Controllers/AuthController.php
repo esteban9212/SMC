@@ -3,8 +3,6 @@ namespace App\Http\Controllers;
 use App\Models\UserCip;
 use App\User;
 use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\LoginRequest;
-use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use JWTAuthException;
@@ -18,26 +16,29 @@ class AuthController extends Controller
         $this->user = $user;
         $this->userC = $userC;
         $this->jwtauth = $jwtauth;
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
-    public function register(RegisterRequest $request)
+
+    public function register($name, $last_name, $username, $email, $password, $identification)
     {
         $newUser = $this->user->create([
-            'name' => $request->get('NAME_USER'),
-            'last_name' => $request->get('LAST_NAME'),
-            'username' => $request->get('LOGIN'),
-            'email' => $request->get('EMAIL'),
-            'password' => bcrypt($request->get('PASSWORD_USER')),
-            'identification' => $request->get('IDENTIFICATION'),
+            'name' => $name,
+            'last_name' => $last_name,
+            'username' => $username,
+            'email' => $email,
+            'password' => bcrypt($password),
+            'identification' => $identification
         ]);
 
         $newUserC = $this->userC->create([
-            'NAME_USER' => $request->get('NAME_USER'),
-            'LAST_NAME' => $request->get('LAST_NAME'),
-            'EMAIL' => $request->get('EMAIL'),
-            'IDENTIFICATION' => $request->get('IDENTIFICATION'),
-            'LOGIN' => $request->get('LOGIN'),
-            'PASSWORD_USER' => bcrypt($request->get('PASSWORD_USER')),
+            'NAME_USER' => $name,
+            'LAST_NAME' => $last_name,
+            'LOGIN' => $username,
+            'EMAIL' => $email,
+            'PASSWORD_USER' => bcrypt($password),
+            'IDENTIFICATION' => $identification,
             'STATE_ID_STATE' => '3'
+
         ]);
 
         if (!$newUser) {
@@ -47,20 +48,15 @@ class AuthController extends Controller
     }
 
 
-    public function login(LoginRequest $request)
+    public function login()
     {
-        // get user credentials: login, password
-        $credentials = $request->only('username', 'password');
-        $token = null;
-        try {
-            $token = $this->jwtauth->attempt($credentials);
-            if (!$token) {
-                return response()->json(['invalid_login_or_password'], 422);
-            }
-        } catch (JWTAuthException $e) {
-            return response()->json(['failed_to_create_token'], 500);
+        $credentials = request(['username', 'password']);
+
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return response()->json(compact('token'));
+
+        return $this->respondWithToken($token);
     }
 
     /**
@@ -107,7 +103,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => $this->guard()->factory()->getTTL() * 60
+            'expires_in' => $this->guard('api')->factory()->getTTL() * 60
         ]);
     }
 

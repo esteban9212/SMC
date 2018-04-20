@@ -47,7 +47,7 @@ Route::get('assessmentSourceByPi/{idPi}', 'AssessmentSourceController@assessment
 
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
 Route::get('userById/{id}', function ($id) {
-    $user = UserCip::where('ID_USER', '=', $id)->first();
+    $user = UserCip::where('IDENTIFICATION', '=', $id)->first();
 
     $response = Response::json($user, 200);
 
@@ -56,24 +56,11 @@ Route::get('userById/{id}', function ($id) {
 })->middleware('cors');
 
 Route::post('/auth/login', 'AuthController@login')->middleware('cors');
-Route::post('logout', 'AuthController@logout')->middleware('cors');
-Route::post('refresh', 'AuthController@refresh')->middleware('cors');
-Route::post('me', 'AuthController@me')->middleware('cors');
+Route::post('/authlogout', 'AuthController@logout')->middleware('cors');
+Route::post('/authrefresh', 'AuthController@refresh')->middleware('cors');
+Route::post('/auth/me', 'AuthController@me')->middleware('cors');
+Route::get('/auth/register/{name}/{last_name}/{username}/{email}/{password}/{identification}', 'AuthController@register')->middleware('cors');
 
-
-Route::group([
-    'prefix' => 'api/v1',
-    'namespace' => 'Api'
-], function () {
-    Route::post('/auth/register', [
-        'as' => 'auth.register',
-        'uses' => 'AuthController@register'
-    ]);
-    Route::post('/auth/login', [
-        'as' => 'auth.login',
-        'uses' => 'AuthController@login'
-    ]);
-});
 
 Route::get('rolsByUserId/{id}', function ($id) {
     $rols = UserCipRoleCip::where('USER_CIP_ID_USER', '=', $id)->get();
@@ -92,3 +79,14 @@ Route::get('getRol/{id}', function ($id) {
     //      header("Access-Control-Allow-Origin: *");
     return $response;
 })->middleware('cors');
+
+
+Route::group([
+       'prefix' => 'v1',
+        'namespace' => 'Api'
+    ], function () {
+        Route::post('/auth/register', [
+            'as' => 'auth.register',
+            'uses' => 'AuthController@register'
+      ])->middleware('cors');
+});
