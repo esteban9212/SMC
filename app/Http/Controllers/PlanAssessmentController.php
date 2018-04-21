@@ -11,6 +11,7 @@ use App\Models\PlanAssessmentBasic;
 use App\Models\UserCip;
 use App\Models\ProgramSmc;
 use App\Models\MainCycle;
+use App\Models\AsSrc;
 
 use Illuminate\support\Facades\Response;
 use function Sodium\add;
@@ -26,6 +27,50 @@ class PlanAssessmentController extends Controller
     {
         $plans = PlanSmc::all();
         $response = Response::json($plans, 200);
+        return $response;
+    }
+
+    /**
+     * Display a plan by id plan.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getPlanById($idPlan)
+    {
+        $plan = PlanSmc::where('ID_PLAN', '=', $idPlan)->first();
+
+        $outcoCycleid = $plan->ID_OUTCOME_CYCLE_AS;
+        $outcomeCycleAs = OutcomeCycleA::where('ID_OUTCO_CYCLE', '=', $outcoCycleid)->first();
+        $cicloPlanid = $outcomeCycleAs->MAIN_CYCLE_ID_CYCLE;
+        $ciclo = MainCycle::where('ID_CYCLE', '=', $cicloPlanid)->first();
+        $mainCicloid = $ciclo->MAIN_CYCLE_ID_CYCLE;
+        $mainCiclo = MainCycle::where('ID_CYCLE', '=', $mainCicloid)->first();
+
+
+        $outcomeid = $outcomeCycleAs->OUTCOME_ID_ST_OUTCOME;
+
+        $outcome = Outcome::where('ID_ST_OUTCOME', '=', $outcomeid)->first();
+
+
+        $Name = 'Plan Assessment ' . $outcome->CRITERION;
+        $liderid = $outcome->USER_CIP_ID_USER;
+        $Leader = UserCip::where('ID_USER', '=', $liderid)->first();
+        $programaid = $outcome->PROGRAM_ID_PROGRAM;
+        $Program = ProgramSmc::where('ID_PROGRAM', '=', $programaid)->first();
+
+        $estadoId = $outcome->STATE_ID_STATE;
+        $State = StateSmc::where('ID_STATE', '=', $estadoId)->first();
+        $DateCreation = $outcome->created_at;
+        $autorid = $plan->USER_CIP_ID_USER;
+        $Author = UserCip::where('ID_USER', '=', $autorid)->first();
+
+
+        $plans2 = new PlanAssessmentBasic($idPlan, $Name, $mainCiclo->CYCLE_NAME, $ciclo->CYCLE_NAME,
+            $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation,
+            $Author->NAME_USER . " " . $Author->LAST_NAME, $outcome->CRITERION . " ", $outcome->DESCRIPTION . " ");
+
+
+        $response = Response::json($plans2, 200);
         return $response;
     }
 
@@ -75,6 +120,7 @@ class PlanAssessmentController extends Controller
     }
 
 
+
     public function getPlansList()
     {
 
@@ -109,7 +155,8 @@ class PlanAssessmentController extends Controller
             $Author = UserCip::where('ID_USER', '=', $autorid)->first();
 
             $Idplan = $i + 1;
-            $plans2[$i] = new PlanAssessmentBasic($Idplan, $Name, $mainCiclo->CYCLE_NAME, $ciclo->CYCLE_NAME, $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation, $Author->NAME_USER . " " . $Author->LAST_NAME);
+            $plans2[$i] = new PlanAssessmentBasic($Idplan, $Name, $mainCiclo->CYCLE_NAME, $ciclo->CYCLE_NAME, $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation,
+                $Author->NAME_USER . " " . $Author->LAST_NAME, $outcome->CRITERION . " ", $outcome->DESCRIPTION . " ");
 
         }
 

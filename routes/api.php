@@ -42,8 +42,8 @@ Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOu
 Route::get('getPisByPlanId/{id}', 'PiController@getPisByPlanId')->middleware('cors');
 Route::get('getCdioByPiId/{id}', 'CdioPiController@getCdioByPiId')->middleware('cors');
 Route::get('getCurricularMappinCDIOOutcome/{idpi}', 'CdioPiController@getCurricularMappinCDIOOutcome')->middleware('cors');
-
 Route::get('assessmentSourceByPi/{idPi}', 'AssessmentSourceController@assessmentSourceByPi')->middleware('cors');
+Route::get('getPlanById/{idPlan}', 'PlanAssessmentController@getPlanById')->middleware('cors');
 
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
 Route::get('userById/{id}', function ($id) {
