@@ -22,10 +22,11 @@ class PlanAssessmentBasic
     public $Author;
     public $Criterion;
     public $Description;
+    public $DateEvaluation;
 
 
     // Constructor
-    public function __construct($Idplan, $Name, $Ciclo, $SubCiclo, $Leader, $Program, $State, $DateCreation, $Author, $Criterion, $Description)
+    public function __construct($Idplan, $Name, $Ciclo, $SubCiclo, $Leader, $Program, $State, $DateCreation, $Author, $Criterion, $Description, $DateEvaluation)
     {
         $this->Idplan = $Idplan;
         $this->Name = $Name;
@@ -38,6 +39,7 @@ class PlanAssessmentBasic
         $this->Author = $Author;
         $this->Criterion = $Criterion;
         $this->Description = $Description;
+        $this->DateEvaluation = $DateEvaluation;
     }
 
 

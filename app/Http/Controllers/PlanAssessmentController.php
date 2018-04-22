@@ -64,10 +64,12 @@ class PlanAssessmentController extends Controller
         $autorid = $plan->USER_CIP_ID_USER;
         $Author = UserCip::where('ID_USER', '=', $autorid)->first();
 
+        $dateEvaluation = $plan->EVALUATION_DATE;
+
 
         $plans2 = new PlanAssessmentBasic($idPlan, $Name, $mainCiclo->CYCLE_NAME, $ciclo->CYCLE_NAME,
             $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation,
-            $Author->NAME_USER . " " . $Author->LAST_NAME, $outcome->CRITERION . " ", $outcome->DESCRIPTION . " ");
+            $Author->NAME_USER . " " . $Author->LAST_NAME, $outcome->CRITERION . " ", $outcome->DESCRIPTION . " ", $dateEvaluation . "");
 
 
         $response = Response::json($plans2, 200);
@@ -153,10 +155,10 @@ class PlanAssessmentController extends Controller
             $DateCreation = $outcome->created_at;
             $autorid = $plans[$i]->USER_CIP_ID_USER;
             $Author = UserCip::where('ID_USER', '=', $autorid)->first();
-
+            $dateEvaluation = $plans[$i]->EVALUATION_DATE;
             $Idplan = $i + 1;
             $plans2[$i] = new PlanAssessmentBasic($Idplan, $Name, $mainCiclo->CYCLE_NAME, $ciclo->CYCLE_NAME, $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation,
-                $Author->NAME_USER . " " . $Author->LAST_NAME, $outcome->CRITERION . " ", $outcome->DESCRIPTION . " ");
+                $Author->NAME_USER . " " . $Author->LAST_NAME, $outcome->CRITERION . " ", $outcome->DESCRIPTION . " ", $dateEvaluation . "");
 
         }
 

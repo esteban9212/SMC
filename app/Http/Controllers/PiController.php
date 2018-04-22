@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssessmentSourceBasic;
 use App\Models\PiCdioAssessmentSource;
 use Illuminate\Http\Request;
 use App\Models\PiSmc;
@@ -11,6 +12,8 @@ use App\Models\CdioSkill;
 use App\Models\CdioCourseMtx;
 use App\Models\Course;
 use App\Models\AsSrc;
+use App\Models\Method;
+use App\Models\UserCip;
 
 class PiController extends Controller
 {
@@ -96,9 +99,23 @@ class PiController extends Controller
 
             for ($j = 0; $j < $assessmentSources->count(); $j++) {
 
-                $idAssessmentSource = $assessmentSources[$j]->COURSE_ID_COURSE;
-                $AssessmentSource = Course::where('ID_COURSE', '=', $idAssessmentSource)->first();
-                $courses[$j] = $AssessmentSource;
+                $idCourse = $assessmentSources[$j]->COURSE_ID_COURSE;
+                $AssessmentCourse = Course::where('ID_COURSE', '=', $idCourse)->first();
+
+                $idMethodAssessment = $assessmentSources[$j]->METHOD_ID_AS_METHOD;
+                $methodAssessment = Method::where('ID_AS_METHOD', '=', $idMethodAssessment)->first();
+
+                $idpersonInCharge = $assessmentSources[$j]->USER_CIP_ID_USER;
+                $personInCharge = UserCip::where('ID_USER', '=', $idpersonInCharge)->first();
+
+                $nameCourse = $AssessmentCourse->NAME_COURSE;
+                $nameMethod = $methodAssessment->NAME;
+                $dateCollection = $assessmentSources[$j]->COLLECTION_DATE;
+                $namePersonCharge = $personInCharge->NAME_USER . " " . $personInCharge->LAST_NAME;
+
+                $AssessmentSourceBasic = new AssessmentSourceBasic($nameCourse, $nameMethod, $dateCollection, $namePersonCharge);
+                $courses[$j] = $AssessmentSourceBasic;
+
 
             }
 
