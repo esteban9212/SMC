@@ -56,8 +56,8 @@ Route::get('userById/{id}', function ($id) {
 })->middleware('cors');
 
 Route::post('/auth/login', 'AuthController@login')->middleware('cors');
-Route::post('/authlogout', 'AuthController@logout')->middleware('cors');
-Route::post('/authrefresh', 'AuthController@refresh')->middleware('cors');
+Route::post('/auth/logout', 'AuthController@logout')->middleware('cors');
+Route::post('/auth/refresh', 'AuthController@refresh')->middleware('cors');
 Route::post('/auth/me', 'AuthController@me')->middleware('cors');
 Route::get('/auth/register/{name}/{last_name}/{username}/{email}/{password}/{identification}', 'AuthController@register')->middleware('cors');
 

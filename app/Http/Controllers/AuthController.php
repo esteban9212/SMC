@@ -16,7 +16,7 @@ class AuthController extends Controller
         $this->user = $user;
         $this->userC = $userC;
         $this->jwtauth = $jwtauth;
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'me']]);
     }
 
     public function register($name, $last_name, $username, $email, $password, $identification)
@@ -100,10 +100,12 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        $user = $this->guard()->user();
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => $this->guard('api')->factory()->getTTL() * 60
+            'expires_in' => $this->guard('api')->factory()->getTTL() * 60,
+            'user' => $user
         ]);
     }
 
