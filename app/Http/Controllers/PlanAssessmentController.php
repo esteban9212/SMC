@@ -150,7 +150,7 @@ class PlanAssessmentController extends Controller
             $programaid = $outcome->PROGRAM_ID_PROGRAM;
             $Program = ProgramSmc::where('ID_PROGRAM', '=', $programaid)->first();
 
-            $estadoId = $outcome->STATE_ID_STATE;
+            $estadoId = $plans[$i]->STATE_ID_STATE;
             $State = StateSmc::where('ID_STATE', '=', $estadoId)->first();
             $DateCreation = $outcome->created_at;
             $autorid = $plans[$i]->USER_CIP_ID_USER;

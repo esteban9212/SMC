@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OutcomeCycleA;
+use App\Models\Outcome;
 use Illuminate\Support\Facades\DB;
 use Illuminate\support\Facades\Response;
 
@@ -49,6 +50,45 @@ class OutcomeCycleAsController extends Controller
         $response = Response::json($outcomeCycleAs, 200);
         return $response;
     }
+
+    /**
+     * Display all outcomes by cycle active
+     * @param  string $idOutcome , id outcome,$idCycle id del ciclo activo programa
+     * @return \Illuminate\Http\Response
+     */
+    public function outcomesByCycleActiveByProgram($idProgram)
+    {
+        $outcomesCycle = array();
+        $outcomes = array();
+        if ($idProgram == 'SIS') {
+            $outcomesCycle = DB::table('outcome_cycle_as')->where([
+                ['MAIN_CYCLE_ID_CYCLE', '=', 9],
+            ])->get();
+
+
+        }
+
+        if ($idProgram == 'TEL') {
+            $outcomesCycle = DB::table('outcome_cycle_as')->where([
+                ['MAIN_CYCLE_ID_CYCLE', '=', 11],
+            ])->get();
+
+        }
+
+
+        for ($i = 0; $i < $outcomesCycle->count(); $i++) {
+
+            $idoutcome = $outcomesCycle[$i]->OUTCOME_ID_ST_OUTCOME;
+            $Outcome = Outcome::where('ID_ST_OUTCOME', '=', $idoutcome)->first();
+            $outcomes[$i] = $Outcome;
+
+        }
+
+        $response = Response::json($outcomes, 200);
+        return $response;
+
+    }
+
 
     /**
      * Store a newly created resource in storage.

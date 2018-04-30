@@ -38,6 +38,8 @@ Route::get('outcomesByUser/{id}', 'OutcomesController@outcomesByUser')->middlewa
 Route::get('outcomesByUserAndProgram/{idUser}/{idProgram}', 'OutcomesController@outcomesByUserAndProgram')->middleware('cors');
 Route::get('outcomesByProgram/{id}', 'OutcomesController@outcomesByProgram')->middleware('cors');
 Route::get('outcomeCycleAsByOutcomeCycle/{idOutcome}/{idCycle}', 'OutcomeCycleAsController@outcomeCycleAsByOutcomeCycle')->middleware('cors');
+Route::get('outcomesByCycleActiveByProgram/{idProgram}', 'OutcomeCycleAsController@outcomesByCycleActiveByProgram')->middleware('cors');
+
 Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOutcomeToCreated')->middleware('cors');
 Route::get('getPisByPlanId/{id}', 'PiController@getPisByPlanId')->middleware('cors');
 Route::get('getCdioByPiId/{id}', 'CdioPiController@getCdioByPiId')->middleware('cors');
@@ -45,6 +47,9 @@ Route::get('getCurricularMappinCDIOOutcome/{idpi}', 'CdioPiController@getCurricu
 Route::get('assessmentSourceByPi/{idPi}', 'AssessmentSourceController@assessmentSourceByPi')->middleware('cors');
 Route::get('getPlanById/{idPlan}', 'PlanAssessmentController@getPlanById')->middleware('cors');
 
+Route::get('getAllUserCip', 'UsersCipController@getAllUserCip')->middleware('cors');
+
+Route::get('changeLeaderOutcome/{idOutcome}/{IdUser}', 'OutcomesController@changeLeaderOutcome')->middleware('cors');
 Route::get('parameterCycle/{id}', 'ParameterController@subCycleActiveByProgram')->middleware('cors');
 Route::get('userById/{id}', function ($id) {
     $user = UserCip::where('IDENTIFICATION', '=', $id)->first();

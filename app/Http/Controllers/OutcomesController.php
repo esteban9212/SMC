@@ -49,6 +49,29 @@ class OutcomesController extends Controller
     }
 
     /**
+     * Change leader to outcome.
+     * @param  string $idOutcome , string idUser , id del director de programa
+     * @return \Illuminate\Http\Response
+     */
+    public function changeLeaderOutcome($idOutcome, $IdUser)
+    {
+
+        $outcome = Outcome::where('ID_ST_OUTCOME', '=', $idOutcome)->first();
+
+        $outcome->USER_CIP_ID_USER = $IdUser;
+        $outcome->save();
+
+
+        $response = Response::json($outcome, 200);
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+    }
+
+
+
+
+
+    /**
      * Display a listing of outcomes by program.
      * @param  string $id , id del program: sis,tel,ind
      * @return \Illuminate\Http\Response
