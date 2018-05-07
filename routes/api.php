@@ -29,6 +29,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::resource('pis', 'PiController');
 });
 
+
+Route::get('allMethods', 'MethodController@getAllMethods')->middleware('cors');
 Route::get('savePlan/{idUser}/{idOutcomeCycleAs}', 'PlanAssessmentController@savePlan')->middleware('cors');
 Route::get('getPlansList', 'PlanAssessmentController@getPlansList')->middleware('cors');
 Route::get('allOutcomes', 'OutcomesController@allOutcomes')->middleware('cors');
@@ -42,10 +44,15 @@ Route::get('outcomesByCycleActiveByProgram/{idProgram}', 'OutcomeCycleAsControll
 
 Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOutcomeToCreated')->middleware('cors');
 Route::get('getPisByPlanId/{id}', 'PiController@getPisByPlanId')->middleware('cors');
+Route::get('getPiByPlanIdPiId/{idPlan}/{idPi}', 'PiController@getPiByPlanIdPiId')->middleware('cors');
 Route::get('getCdioByPiId/{id}', 'CdioPiController@getCdioByPiId')->middleware('cors');
 Route::get('getCurricularMappinCDIOOutcome/{idpi}', 'CdioPiController@getCurricularMappinCDIOOutcome')->middleware('cors');
 Route::get('assessmentSourceByPi/{idPi}', 'AssessmentSourceController@assessmentSourceByPi')->middleware('cors');
 Route::get('getPlanById/{idPlan}', 'PlanAssessmentController@getPlanById')->middleware('cors');
+Route::get('getMappingCourses/{id}', 'PiController@getMappingCourses')->middleware('cors');
+
+
+
 
 Route::get('getAllUserCip', 'UsersCipController@getAllUserCip')->middleware('cors');
 
