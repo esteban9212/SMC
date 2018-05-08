@@ -55,6 +55,33 @@ class UsersCipController extends Controller
 
     }
 
+    public function getAllProfesors()
+    {
+
+        $users = UserCip::all();
+        $users2 = array();
+
+        for ($i = 0; $i < $users->count(); $i++) {
+            $userId = $users[$i]->ID_USER;
+            $rolesUser = UserCipRoleCip::where('USER_CIP_ID_USER', '=', $userId)->get();
+
+            for ($j = 0; $j < $rolesUser->count(); $j++) {
+                $idrol = $rolesUser[$j]->ROLE_CIP_ID_ROLE;
+                if($idrol == 4){
+                    $nameUser = $users[$i]->NAME_USER;
+                    $emailUser = $users[$i]->EMAIL;
+                    $nameRoles = "";
+                    $userCipBasic = new UserCipBasic($userId, $nameUser, $emailUser, $nameRoles);
+                    array_push($users2, $userCipBasic);
+                }
+            }
+        }
+        $response = Response::json($users2, 200);
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

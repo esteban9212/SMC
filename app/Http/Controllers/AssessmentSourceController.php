@@ -56,6 +56,17 @@ class AssessmentSourceController extends Controller
         return $response;
     }
 
+    public function assessmentSourcesByPi($idPi)
+    {
+        $assessmentSources = AsSrc::where([
+            ['PI_ID_PI', '=', $idPi]
+        ])->get();
+
+        $response = Response::json($assessmentSources, 200);
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -96,11 +107,25 @@ class AssessmentSourceController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateAS($idAsSrc, $idCourse, $colDate, $idMethod, $idProf)
     {
-        //
-    }
+        $assessmentSource = AsSrc::where([
+            ['ID_AS_SRC', '=', $idAsSrc]
+        ])->first();
 
+        $assessmentSource->COURSE_ID_COURSE = $idCourse;
+        $assessmentSource->COLLECTION_DATE = $colDate;
+        $assessmentSource->METHOD_ID_AS_METHOD = $idMethod;
+        $assessmentSource->USER_CIP_ID_USER = $idProf;
+
+        $assessmentSource->save();
+
+        $message = "updated source of assessment";
+
+        $response = Response::json($message, 200);
+        return $response;
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
