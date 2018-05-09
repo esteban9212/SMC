@@ -52,6 +52,15 @@ Route::get('getPlanById/{idPlan}', 'PlanAssessmentController@getPlanById')->midd
 Route::get('getMappingCourses/{id}', 'PiController@getMappingCourses')->middleware('cors');
 
 Route::get('updateAS/{idAsSrc}/{idCourse}/{colDate}/{idMethod}/{idProf}', 'AssessmentSourceController@updateAS')->middleware('cors');
+Route::get('updateAS1/{idAsSrc}/{idCourse}', 'AssessmentSourceController@updateAS1')->middleware('cors');
+Route::get('updateAS2/{idAsSrc}/{colDate}', 'AssessmentSourceController@updateAS2')->middleware('cors');
+Route::get('updateAS3/{idAsSrc}/{idMethod}', 'AssessmentSourceController@updateAS3')->middleware('cors');
+Route::get('updateAS4/{idAsSrc}/{idProf}', 'AssessmentSourceController@updateAS4')->middleware('cors');
+
+Route::get('createAS/{idPi}/{idCourse}/{colDate}/{idMethod}/{idProf}', 'AssessmentSourceController@createAS')->middleware('cors');
+
+Route::get('destroy/{idAsSrc}', 'AssessmentSourceController@destroy')->middleware('cors');
+
 Route::get('assessmentSourcesByPi/{idPi}', 'AssessmentSourceController@assessmentSourcesByPi')->middleware('cors');
 
 

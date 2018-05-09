@@ -125,15 +125,109 @@ class AssessmentSourceController extends Controller
         $response = Response::json($message, 200);
         return $response;
     }
-    
+
+    public function updateAS1($idAsSrc, $idCourse)
+    {
+        $assessmentSource = AsSrc::where([
+            ['ID_AS_SRC', '=', $idAsSrc]
+        ])->first();
+
+        $assessmentSource->COURSE_ID_COURSE = $idCourse;
+
+        $assessmentSource->save();
+
+        $message = "updated source of assessment";
+
+        $response = Response::json($message, 200);
+        return $response;
+    }
+
+    public function updateAS2($idAsSrc, $colDate)
+    {
+        $assessmentSource = AsSrc::where([
+            ['ID_AS_SRC', '=', $idAsSrc]
+        ])->first();
+
+        $assessmentSource->COLLECTION_DATE = $colDate;
+
+        $assessmentSource->save();
+
+        $message = "updated source of assessment";
+
+        $response = Response::json($message, 200);
+        return $response;
+    }
+
+    public function updateAS3($idAsSrc, $idMethod)
+    {
+        $assessmentSource = AsSrc::where([
+            ['ID_AS_SRC', '=', $idAsSrc]
+        ])->first();
+
+        $assessmentSource->METHOD_ID_AS_METHOD = $idMethod;
+
+        $assessmentSource->save();
+
+        $message = "updated source of assessment";
+
+        $response = Response::json($message, 200);
+        return $response;
+    }
+
+    public function updateAS4($idAsSrc, $idProf)
+    {
+        $assessmentSource = AsSrc::where([
+            ['ID_AS_SRC', '=', $idAsSrc]
+        ])->first();
+
+        $assessmentSource->USER_CIP_ID_USER = $idProf;
+
+        $assessmentSource->save();
+
+        $message = "updated source of assessment";
+
+        $response = Response::json($message, 200);
+        return $response;
+    }
+
+    public function createAS($idPi, $idCourse, $colDate, $idMethod, $idProf)
+    {
+        $assessmentSource = new AsSrc();
+
+        $assessmentSource->PI_ID_PI = $idPi;
+        $assessmentSource->COURSE_ID_COURSE = $idCourse;
+        $assessmentSource->COLLECTION_DATE = $colDate;
+        $assessmentSource->METHOD_ID_AS_METHOD = $idMethod;
+        $assessmentSource->USER_CIP_ID_USER = $idProf;
+        $assessmentSource->COLLECTION_FREQUENCY="1 dia";
+
+        $assessmentSource->save();
+
+        $message = "Created source of assessment";
+
+        $response = Response::json($message, 200);
+        return $response;
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idAsSrc)
     {
-        //
+
+        $assessmentSource = AsSrc::where([
+            ['ID_AS_SRC', '=', $idAsSrc]
+        ])->first();
+
+        $assessmentSource->delete();
+
+        $message = "Deleted source of assessment";
+
+        $response = Response::json($message, 200);
+        return $response;
+
     }
 }
