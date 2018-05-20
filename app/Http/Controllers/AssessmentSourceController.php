@@ -7,6 +7,7 @@ use App\Models\AsSrc;
 use App\Models\Course;
 use App\Models\PiSmc;
 use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\DB;
 
 class AssessmentSourceController extends Controller
 {
@@ -218,11 +219,7 @@ class AssessmentSourceController extends Controller
     public function destroy($idAsSrc)
     {
 
-        $assessmentSource = AsSrc::where([
-            ['ID_AS_SRC', '=', $idAsSrc]
-        ])->first();
-
-        $assessmentSource->delete();
+        DB::table('as_src')->where('ID_AS_SRC', '=', $idAsSrc)->delete();
 
         $message = "Deleted source of assessment";
 

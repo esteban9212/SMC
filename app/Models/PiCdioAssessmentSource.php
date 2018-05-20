@@ -28,6 +28,5 @@ class PiCdioAssessmentSource
         $this->Cdios = array();
         $this->MappingCourses = array();
         $this->AssessmentCourses = array();
-
     }
 }

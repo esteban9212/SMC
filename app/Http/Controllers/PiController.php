@@ -37,7 +37,7 @@ class PiController extends Controller
         $pis = PiSmc::where([
             //STATE_ID_STATE = '5' outcome  de estado activo
             ['PLAN_ID_PLAN', '=', $id],
-        ])->get();;
+        ])->get();
 
         for ($i = 0; $i < $pis->count(); $i++) {
 
