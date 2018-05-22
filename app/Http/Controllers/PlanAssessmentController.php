@@ -60,11 +60,11 @@ class PlanAssessmentController extends Controller
 
         $estadoId = $outcome->STATE_ID_STATE;
         $State = StateSmc::where('ID_STATE', '=', $estadoId)->first();
-        $DateCreation = $outcome->created_at;
+        $DateCreation = date("d/m/Y", strtotime($outcome->created_at));
         $autorid = $plan->USER_CIP_ID_USER;
         $Author = UserCip::where('ID_USER', '=', $autorid)->first();
 
-        $dateEvaluation = $plan->EVALUATION_DATE;
+        $dateEvaluation = date("d/m/Y", strtotime($plan->EVALUATION_DATE));
 
 
         $plans2 = new PlanAssessmentBasic($idPlan, $Name, $mainCiclo->CYCLE_NAME, $ciclo->CYCLE_NAME,
@@ -152,10 +152,10 @@ class PlanAssessmentController extends Controller
 
             $estadoId = $plans[$i]->STATE_ID_STATE;
             $State = StateSmc::where('ID_STATE', '=', $estadoId)->first();
-            $DateCreation = $outcome->created_at;
+            $DateCreation = date("d/m/Y", strtotime($outcome->created_at));
             $autorid = $plans[$i]->USER_CIP_ID_USER;
             $Author = UserCip::where('ID_USER', '=', $autorid)->first();
-            $dateEvaluation = $plans[$i]->EVALUATION_DATE;
+            $dateEvaluation = date("d/m/Y", strtotime($plans[$i]->EVALUATION_DATE));
             $Idplan = $i + 1;
             $plans2[$i] = new PlanAssessmentBasic($Idplan, $Name, $mainCiclo->CYCLE_NAME, $ciclo->CYCLE_NAME, $Leader->NAME_USER . " " . $Leader->LAST_NAME, $Program->NAME_PROGRAM, $State->STATE_NAME, $DateCreation,
                 $Author->NAME_USER . " " . $Author->LAST_NAME, $outcome->CRITERION . " ", $outcome->DESCRIPTION . " ", $dateEvaluation . "");
