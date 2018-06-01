@@ -175,6 +175,7 @@ return [
          * correccion erro cors
          */
         Barryvdh\Cors\ServiceProvider::class,
+        \Barryvdh\Cors\HandleCors::class,
         /*
          * Application Service Providers...
          */
