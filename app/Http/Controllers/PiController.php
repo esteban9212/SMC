@@ -299,8 +299,19 @@ class PiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($codePi, $description, $planID)
     {
+        $pi = ['CODE' => $codePi, 'DESCRIPTION' => $description, 'PLAN_ID_PLAN' => $planID];
+
+        PiSmc::create($pi);
+        //  console.log("algo");
+
+        $pis = PiSmc::all();
+        $response = Response::json(['message' => 'todo bien']);
+
+
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
         //
     }
 
