@@ -13,7 +13,7 @@ use App\Models\ProgramSmc;
 use App\Models\MainCycle;
 use App\Models\AsSrc;
 
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 use function Sodium\add;
 
 class PlanAssessmentController extends Controller

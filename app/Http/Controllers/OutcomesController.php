@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Outcome;
 use Illuminate\Support\Facades\DB;
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 
 
 class OutcomesController extends Controller

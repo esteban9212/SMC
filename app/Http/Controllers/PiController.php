@@ -6,7 +6,7 @@ use App\Models\AssessmentSourceBasic;
 use App\Models\PiCdioAssessmentSource;
 use Illuminate\Http\Request;
 use App\Models\PiSmc;
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 use App\Models\CdioSkillPi;
 use App\Models\CdioSkill;
 use App\Models\CdioCourseMtx;

@@ -9,7 +9,7 @@ use App\Models\Outcome;
 use App\Models\CdioOutcomeMtx;
 use App\Models\CdioCourseMtx;
 use App\Models\Course;
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 
 class CdioPiController extends Controller
 {
