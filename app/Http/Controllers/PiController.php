@@ -18,6 +18,50 @@ use App\Models\UserCip;
 class PiController extends Controller
 {
     /**
+     * Store a PI in database.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function savePi($code, $description, $idPlan)
+    {
+        $pi = ['CODE' => $code, 'DESCRIPTION' => $description, 'PLAN_ID_PLAN' => $idPlan];
+
+        PiSmc::create($pi);
+
+        $pis = PiSmc::all();
+        $response = Response::json(['message' => 'todo bien']);
+
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+        //
+    }
+
+
+    /**
+     * Store a PI in database.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function savePiCdioMTX($idCdioSkill, $idPi)
+    {
+        $piCdio = ['CDIO_SKILL_ID_CDIO_SKILL' => $idCdioSkill, 'PI_ID_PI' => $idPi];
+
+        CdioSkillPi::create($piCdio);
+
+        $pisCdiosMtx = PiSmc::all();
+        $response = Response::json(['message' => 'todo bien']);
+
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+        //
+    }
+
+
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -46,7 +90,6 @@ class PiController extends Controller
             $DescriptionPi = $pis[$i]->DESCRIPTION;
             $pis2[$i] = new PiCdioAssessmentSource($Idpi, $CodePi, $DescriptionPi);
 
-
             $cdios2 = array();
             $cdios = CdioSkillPi::where([
                 ['PI_ID_PI', '=', $Idpi],
@@ -56,7 +99,6 @@ class PiController extends Controller
                 $idcdio = $cdios[$j]->CDIO_SKILL_ID_CDIO_SKILL;
                 $cdioSkill = CdioSkill::where('ID_CDIO_SKILL', '=', $idcdio)->first();
                 $cdios2[$j] = $cdioSkill;
-
             }
 
             $pis2[$i]->Cdios = $cdios2;

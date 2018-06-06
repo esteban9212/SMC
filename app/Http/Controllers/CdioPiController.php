@@ -24,6 +24,58 @@ class CdioPiController extends Controller
     }
 
     /**
+     * Display a listing all Cdio By Outcome .
+     * @return \Illuminate\Http\Response
+     */
+    public function getCdioByOutcome($idOutcome)
+    {
+        $cdios2 = array();
+        $cdios = CdioOutcomeMtx::where([
+            //STATE_ID_STATE = '5' outcome  de estado activo
+            ['ID_ST_OUTCOME', '=', $idOutcome],
+        ])->get();;
+
+
+        for ($i = 0; $i < $cdios->count(); $i++) {
+            $idcdio = $cdios[$i]->CDIO_SKILL_ID_CDIO_SKILL;
+            $cdioSkill = CdioSkill::where('CDIO_SKILL_ID_CDIO_SKILL', '=', $idcdio)->first();
+            $cdios2[$i] = $cdioSkill;
+        }
+
+
+        $response = Response::json($cdios2, 200);
+        return $response;
+    }
+
+    /**
+     * Display a listing all Cdio By Outcome .
+     * @return \Illuminate\Http\Response
+     */
+    public function getCoursesByCdio2($idCdio)
+    {
+
+        $courses = CdioCourseMtx::where([
+            ['ID_CDIO_SKILL', '=', $idCdio],
+        ])->get();
+
+        $idCourses = array();
+        for ($i = 0; $i < sizeof($courses); $i++) {
+
+            $idCourse = $courses[$i]->ID_COURSE;
+
+
+            $courses2 = Course::where([
+                ['ID_COURSE', '=', $idCourse],
+            ])->get()->toArray();
+
+            $idCourses = array_merge($idCourses, $courses2);
+
+        }
+        $response = Response::json($idCourses, 200);
+        return $response;
+    }
+
+    /**
      * Display a listing all cdioBy PI .
      * @return \Illuminate\Http\Response
      */

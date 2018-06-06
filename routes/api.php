@@ -45,6 +45,9 @@ Route::get('outcomesByCycleActiveByProgram/{idProgram}', 'OutcomeCycleAsControll
 Route::get('changeStateOutcomeToCreated/{id}', 'OutcomesController@changeStateOutcomeToCreated')->middleware('cors');
 Route::get('getPisByPlanId/{id}', 'PiController@getPisByPlanId')->middleware('cors');
 Route::get('getPiByPlanIdPiId/{idPlan}/{idPi}', 'PiController@getPiByPlanIdPiId')->middleware('cors');
+Route::get('savePi/{code}/{description}/{idPlan}', 'PiController@savePi')->middleware('cors');
+Route::get('savePiCdioMTX/{idCdioSkill}/{idPi}', 'PiController@savePiCdioMTX')->middleware('cors');
+
 Route::get('getCdioByPiId/{id}', 'CdioPiController@getCdioByPiId')->middleware('cors');
 Route::get('getCurricularMappinCDIOOutcome/{idpi}', 'CdioPiController@getCurricularMappinCDIOOutcome')->middleware('cors');
 Route::get('assessmentSourceByPi/{idPi}', 'AssessmentSourceController@assessmentSourceByPi')->middleware('cors');
@@ -62,7 +65,8 @@ Route::get('createAS/{idPi}/{idCourse}/{colDate}/{idMethod}/{idProf}', 'Assessme
 Route::get('destroy/{idAsSrc}', 'AssessmentSourceController@destroy')->middleware('cors');
 
 Route::get('assessmentSourcesByPi/{idPi}', 'AssessmentSourceController@assessmentSourcesByPi')->middleware('cors');
-
+Route::get('getCdioByOutcome/{idOutcome}', 'CdioPiController@getCdioByOutcome')->middleware('cors');
+Route::get('getCoursesByCdio2/{idCdio}', 'CdioPiController@getCoursesByCdio2')->middleware('cors');
 
 Route::get('getAllProfessors', 'UsersCipController@getAllProfesors')->middleware('cors');
 Route::get('getAllUserCip', 'UsersCipController@getAllUserCip')->middleware('cors');
@@ -84,6 +88,8 @@ Route::post('/auth/refresh', 'AuthController@refresh')->middleware('cors');
 Route::post('/auth/me', 'AuthController@me')->middleware('cors');
 Route::get('/auth/register/{name}/{last_name}/{username}/{email}/{password}/{identification}', 'AuthController@register')->middleware('cors');
 
+
+Route::get('saveAssessmentCourse/{idUser}/{idCourse}/{idPi}/{idMethod}/{dateFrecuency}/{dateCollection}', 'AssessmentSourceController@saveAssessmentCourse')->middleware('cors');
 
 Route::get('rolsByUserId/{id}', function ($id) {
     $rols = UserCipRoleCip::where('USER_CIP_ID_USER', '=', $id)->get();
@@ -113,3 +119,4 @@ Route::group([
             'uses' => 'AuthController@register'
       ])->middleware('cors');
 });
+

@@ -86,4 +86,22 @@ class ProgramController extends Controller
     {
         //
     }
+
+    public function outcomesByDirector($id)
+    {
+        $program = DB::table('program_smc')->where([
+            ['USER_CIP_ID_USER', '=', $id]
+        ])->first();
+
+
+        $outcomes = DB::table('outcome')->where([
+            ['PROGRAM_ID_PROGRAM', '=', $program->ID_PROGRAM],
+            //STATE_ID_STATE = '5' outcome  de estado activo
+            ['STATE_ID_STATE', '=', '5'],
+        ])->get();
+
+        $response = Response::json($outcomes, 200);
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+    }
 }

@@ -11,6 +11,33 @@ use Illuminate\Support\Facades\DB;
 
 class AssessmentSourceController extends Controller
 {
+
+
+    /**
+     * Store a assessmentCourse in database.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveAssessmentCourse($idUser, $idCourse, $idPi, $idMethod, $dateFrecuency, $dateCollection)
+    {
+        $assrc = ['USER_CIP_ID_USER' => $idUser, 'COURSE_ID_COURSE' => $idCourse, 'PI_ID_PI' => $idPi,
+            'METHOD_ID_AS_METHOD' => $idMethod, 'COLLECTION_FREQUENCY' => $dateFrecuency, 'COLLECTION_DATE' => $dateCollection];
+
+        AsSrc::create($assrc);
+
+
+        $coursesAssessments = AsSrc::all();
+        $response = Response::json(['message' => 'todo bien']);
+
+
+        //      header("Access-Control-Allow-Origin: *");
+        return $response;
+        //
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
