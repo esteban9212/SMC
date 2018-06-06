@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Method;
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 
 class MethodController extends Controller
 {

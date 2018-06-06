@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\AsSrc;
 use App\Models\Course;
 use App\Models\PiSmc;
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 
 class AssessmentSourceController extends Controller

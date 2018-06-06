@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ParamSmc;
 use Illuminate\Support\Facades\DB;
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 
 class ParameterController extends Controller
 {

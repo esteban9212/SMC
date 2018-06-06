@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProgramSmc;
 use Illuminate\Http\Request;
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 
 class ProgramController extends Controller
 {

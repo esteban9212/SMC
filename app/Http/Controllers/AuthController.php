@@ -6,6 +6,8 @@ use App\Http\Requests\RegisterRequest;
 use Tymon\JWTAuth\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use JWTAuthException;
+use Response;
+
 class AuthController extends Controller
 {
     private $user;

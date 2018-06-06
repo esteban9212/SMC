@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UserCip;
 use App\Models\RoleCip;
 use App\Models\UserCipRoleCip;
-use Illuminate\support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 use App\Models\UserCipBasic;
 
 class UsersCipController extends Controller
