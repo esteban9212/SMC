@@ -37,7 +37,7 @@ class CdioPiController extends Controller
 
 
         for ($i = 0; $i < $cdios->count(); $i++) {
-            $idcdio = $cdios[$i]->CDIO_SKILL_ID_CDIO_SKILL;
+            $idcdio = $cdios[$i]->ID_CDIO_SKILL;
             $cdioSkill = CdioSkill::where('CDIO_SKILL_ID_CDIO_SKILL', '=', $idcdio)->first();
             $cdios2[$i] = $cdioSkill;
         }
